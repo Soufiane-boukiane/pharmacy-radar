@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "project_name": "Sefrou Smart City",
+  "description": "A smart city application for Sefrou, Morocco",
+  "features": {
+    "pharmacy_hub": {
+      "status": "in_progress",
+      "description": "Pharmacy locator with duty system",
+      "components": [
+        "Pharmacy list with real-time status",
+        "Duty pharmacy highlighting",
+        "Map integration",
+        "Contact functionality"
+      ]
+    },
+    "weather": {
+      "status": "in_progress",
+      "description": "Real-time weather information",
+      "components": [
+        "Current weather display",
+        "5-day forecast",
+        "Weather details (humidity, wind, UV index)"
+      ]
+    },
+    "services": {
+      "status": "in_progress",
+      "description": "City services directory",
+      "components": [
+        "Emergency services",
+        "Transport information",
+        "Tourism attractions",
+        "Local services"
+      ]
+    }
+  },
+  "design_system": {
+    "colors": {
+      "primary_green": "#2D5016",
+      "accent_green": "#4CAF50",
+      "mountain_white": "#F5F5F5",
+      "royal_purple": "#8B4789",
+      "dark_bg": "#0F1419",
+      "card_bg": "#1A1F2E"
+    },
+    "typography": "Poppins",
+    "theme": "Dark Mode with Glassmorphism"
+  },
+  "next_steps": [
+    "Integrate Google Places API for pharmacy data",
+    "Connect OpenWeatherMap API",
+    "Set up Firebase Firestore for duty system",
+    "Implement flutter_map for map display",
+    "Add location services",
+    "Create API service layer",
+    "Implement state management with Bloc"
+  ]
+}

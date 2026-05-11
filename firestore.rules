@@ -1,0 +1,45 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Function to check if user is an admin
+    function isAdmin() {
+      return request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Pharmacies: Everyone can read, only admins can write
+    match /pharmacies/{pharmacyId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Government Services: Everyone can read, only admins can write
+    match /government_services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Duty Schedules: Everyone can read, only admins can write
+    match /duty_schedules/{scheduleId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Users: Users can read/write their own profiles, admins can read all
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow write: if request.auth != null && (request.auth.uid == userId || isAdmin());
+    }
+
+    // Admin Logs: Only admins can read/write
+    match /admin_logs/{logId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Default: Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
